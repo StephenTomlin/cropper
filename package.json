@@ -1,0 +1,26 @@
+{
+  "name": "cropper",
+  "version": "1.0.0",
+  "description": "this app is going to crop user provided images",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StephenTomlin/cropper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StephenTomlin/cropper/issues"
+  },
+  "homepage": "https://github.com/StephenTomlin/cropper#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "passport": "^0.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
