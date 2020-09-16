@@ -7,6 +7,7 @@ import { HeaderComponent } from './prefabs/header/header.component';
 import { FooterComponent } from './prefabs/footer/footer.component';
 import { RegisterModule } from './register/register.module';
 import { HttpClientModule } from '@angular/common/http'
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http'
     BrowserModule,
     AppRoutingModule,
     LoginRoutingModule,
-    RegisterModule
+    RegisterModule,
+    // ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
