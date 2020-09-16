@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { buttonSize } from '../prefabs/button/button.types';
+
 
 @Component({
   selector: 'app-header',
@@ -7,10 +7,6 @@ import { buttonSize } from '../prefabs/button/button.types';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  public large = buttonSize.large;
-  public small = buttonSize.small;
-  public block = buttonSize.block;
   
   constructor() { }
 
