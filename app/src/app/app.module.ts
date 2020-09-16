@@ -6,6 +6,7 @@ import { LoginRoutingModule } from './login/login-routing.module';
 import { HeaderComponent } from './prefabs/header/header.component';
 import { FooterComponent } from './prefabs/footer/footer.component';
 import { RegisterModule } from './register/register.module';
+import { HttpClientModule } from '@angular/common/http'
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { RegisterModule } from './register/register.module';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    HttpClientModule
   ],
   imports: [
     BrowserModule,
