@@ -7,8 +7,8 @@ import * as firebase from 'firebase';
 
 
 import * as userActions from '../_actions/user.actions';
-import { Observable } from 'rxjs';
-import { delay, map, switchMap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { catchError, delay, map, switchMap } from 'rxjs/operators';
 
 export type Action = userActions.All;
 
@@ -30,8 +30,31 @@ export class UserEffects {
             if (authData) {
                 const user = new User(authData.uid, authData.displayName);
                 return new userActions.Authenticated(user);
+            } else {
+                return new userActions.NotAuthenticated();
             }
-        })
+        }),
+        catchError(err => of(new userActions.AuthError()))
     )
+
+    @Effect()
+    login: Observable<Action> = this.actions
+    .pipe(
+        map((action: userActions.Login) => action.payload),
+        switchMap(payload => {
+            return from(this.firebaseLogin());
+        }),
+        map(cred => {
+            // successful login
+            return new userActions.GetUser();
+        }),
+        catchError(err => of(new userActions.AuthError()))
+    )
+
+    /// Helper Method
+    private firebaseLogin(): Promise<any> {
+        const provider = new firebase.auth.EmailAuthProvider();
+        return this.afAuth.signInWithPopup(provider)
+    }
 
 }
