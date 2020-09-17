@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "cropper-bb159": {
+      "hosting": {
+        "app": [
+          "cropper-bb159"
+        ]
+      }
+    }
+  }
+}

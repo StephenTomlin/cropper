@@ -7,8 +7,25 @@ import { HeaderComponent } from './prefabs/header/header.component';
 import { FooterComponent } from './prefabs/footer/footer.component';
 import { RegisterModule } from './register/register.module';
 import { HttpClientModule } from '@angular/common/http'
-import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+// import { UserEffects } from './effects/user.effects';
+import {userReducer } from './_reducers/user.reducer'
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth'
+import { UserEffects } from './_effects/user.effects';
+// import { _userReducer } from './_reducers/user.reducer'
 
+const firebaseConfig = {
+  apiKey: "AIzaSyAHG9wcpc9TU5IXqf0LamsRawlpGx3qeLw",
+  authDomain: "cropper-bb159.firebaseapp.com",
+  databaseURL: "https://cropper-bb159.firebaseio.com",
+  projectId: "cropper-bb159",
+  storageBucket: "cropper-bb159.appspot.com",
+  messagingSenderId: "966746658747",
+  appId: "1:966746658747:web:03981cf7a2f54c3888969e",
+  measurementId: "G-ERB8WBLQCS"
+};
 
 @NgModule({
   declarations: [
@@ -22,7 +39,15 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     LoginRoutingModule,
     RegisterModule,
-    // ReactiveFormsModule
+
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
+
+    EffectsModule.forRoot([
+      UserEffects
+    ]),
+
+    StoreModule.forRoot({user: userReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]

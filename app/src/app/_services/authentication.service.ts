@@ -3,18 +3,24 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators'
+import { Store, select } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<any>;
-  public currentUser: Observable<any>;
+  private currentUserSubject$: BehaviorSubject<any>;
+  public currentUser$: Observable<any>;
 
 
-  constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentuser'))); // replace this with get from ngrx store
-    this.currentUser = this.currentUserSubject.asObservable();
+  constructor(
+    private http: HttpClient,
+    private _store: Store
+  ) {
+      this.currentUserSubject$ = this._store.pipe(select('user'))
+    
+    // this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentuser'))); // replace this with get from ngrx store
+    this.currentUser$ = this.currentUserSubject$
   }
 
   public get currentUserValue() {
