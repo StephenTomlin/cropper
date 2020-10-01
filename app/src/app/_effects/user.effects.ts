@@ -51,6 +51,14 @@ export class UserEffects {
         catchError(err => of(new userActions.AuthError()))
     )
 
+    @Effect
+    logout:  Observable<Action> = this.actions.pipe(
+        map((action: userActions.Logout) => action.payload),
+        switchMap(payload => of(this.afAuth.signOut())),
+        map(authData => new userActions.NotAuthenticated),
+        catchError(err => of(new userActions.AuthError({ error: err.message })));
+    )
+
     /// Helper Method
     private firebaseLogin(): Promise<any> {
         const provider = new firebase.auth.EmailAuthProvider();
